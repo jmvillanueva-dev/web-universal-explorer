@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universe Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-rocket"></i>
+                    <span>Universe Explorer</span>
+                </a>
+                <div class="nav-links">
+                    <div class="nav-links" >
+                        <a href="#hero">Inicio</a>
+                        <a href="#contact">Contacto</a>
+                    </div>
+                    <a href="#" class="btn" id="loginBtn">Iniciar Sesión</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Descubre los Misterios del Universo</h1>
+                <p>Explora las maravillas del cosmos a través de los datos de la NASA. Imágenes asombrosas, datos científicos y las últimas noticias del espacio a tu alcance.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn">Explorar Ahora</a>
+                    <a href="#" class="btn btn-outline">Ver Galería</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="container">
+            <h2 class="section-title">Últimas Noticias del Espacio</h2>
+            <div class="news-grid" id="newsGrid">
+                <!-- News cards will be loaded here -->
+            </div>
+            <div class="load-more">
+                <button class="btn" id="loadMoreBtn">Cargar Más Noticias</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Iniciar Sesión</button>
+            </form>
+            <div class="form-footer">
+                <p>O inicia sesión con</p>
+                <div class="social-login">
+                    <div class="social-btn facebook" id="facebookLogin">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="social-btn google" id="googleLogin">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-btn twitter" id="twitterLogin">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                <div class="switch-form">
+                    <p>¿No tienes una cuenta? <a href="#" id="showRegister">Regístrate</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeRegisterModal">&times;</span>
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nombre Completo</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Registrarse</button>
+            </form>
+            <div class="form-footer">
+                <p>O regístrate con</p>
+                <div class="social-login">
+                    <div class="social-btn facebook" id="facebookRegister">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="social-btn google" id="googleRegister">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-btn twitter" id="twitterRegister">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                <div class="switch-form">
+                    <p>¿Ya tienes una cuenta? <a href="#" id="showLogin">Iniciar Sesión</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NASA Explorer</h3>
+                    <p>Explorando el universo desde la Tierra. Accede a datos, imágenes y noticias directamente de la NASA y entérate de las últimas noticias.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Galería</a></li>
+                        <li><a href="#">API Explorer</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#">API de la NASA</a></li>
+                        <li><a href="#">Documentación</a></li>
+                        <li><a href="#">Tutoriales</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@univesrexplorer.com</li>
+                        <li><i class="fas fa-phone"></i> +593 995910824</li>
+                        <li><i class="fas fa-map-marker-alt"></i> EPN - Quito, Ecuador</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Universe Explorer. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="script.js"> </script>
+</body>
+</html> 
