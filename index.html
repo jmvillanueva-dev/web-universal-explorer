@@ -3,25 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/src/assets/icons/fav-icon.svg">
     <title>Universe Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    </head>
+    <body>
     <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <i class="fas fa-rocket"></i>
+                    <svg class="icon">
+                        <use href="/src/assets/img/icons.svg#rocket"></use>
+                    </svg>
                     <span>Universe Explorer</span>
                 </a>
                 <div class="nav-links">
                     <div class="nav-links" >
-                        <a href="#hero">Inicio</a>
-                        <a href="#contact">Contacto</a>
+                        <a href="#hero">
+                            <div>
+                                <svg class="icon">
+                                    <use href="/src/assets/img/icons.svg#home"></use>
+                                </svg>
+                                <span>Inicio</span>
+                            </div>
+                        </a>
+                        <a href="#news-section">
+                            <div>
+                                <svg class="icon">
+                                    <use href="/src/assets/img/icons.svg#news"></use>
+                                </svg>
+                                <span>Noticias</span>
+                            </div>
+                        </a>
+                        <a href="#contact">
+                            <div>
+                                <svg class="icon">
+                                    <use href="/src/assets/img/icons.svg#contacts"></use>
+                                </svg>
+                                <span>Contacto</span>
+                            </div>
+                        </a>
                     </div>
-                    <a href="#" class="btn" id="loginBtn">Iniciar Sesión</a>
+                    <a href="#" class="btn" id="loginBtn">
+                        <div>
+                            <svg class="icon">
+                                <use href="/src/assets/img/icons.svg#login"></use>
+                            </svg>
+                            <span>Iniciar Sesión</span>
+                        </div>
+                    </a>
                 </div>
             </nav>
         </div>
@@ -42,7 +74,7 @@
     </section>
 
     <!-- News Section -->
-    <section class="news-section">
+    <section class="news-section" id="news-section">
         <div class="container">
             <h2 class="section-title">Últimas Noticias del Espacio</h2>
             <div class="news-grid" id="newsGrid">
@@ -139,40 +171,80 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>NASA Explorer</h3>
+                    <h3>Universe Explorer</h3>
                     <p>Explorando el universo desde la Tierra. Accede a datos, imágenes y noticias directamente de la NASA y entérate de las últimas noticias.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#">
+                            <svg class="icon">
+                                <use href="/src/assets/img/icons.svg#facebook"></use>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg class="icon">
+                                <use href="/src/assets/img/icons.svg#twitter"></use>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg class="icon">
+                                <use href="/src/assets/img/icons.svg#instagram"></use>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg class="icon">
+                                <use href="/src/assets/img/icons.svg#youtube"></use>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h3>Enlaces Rápidos</h3>
                     <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Galería</a></li>
-                        <li><a href="#">API Explorer</a></li>
-                        <li><a href="#">Noticias</a></li>
-                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#hero">Inicio</a></li>
+                        <li><a href="#news-section">Noticias</a></li>
+                        <li><a href="#contact">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Recursos</h3>
                     <ul>
-                        <li><a href="#">API de la NASA</a></li>
+                        <li><a href="https://api.nasa.gov/" target="_blank">API de la NASA</a></li>
                         <li><a href="#">Documentación</a></li>
-                        <li><a href="#">Tutoriales</a></li>
                         <li><a href="#">Blog</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contacto</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> info@univesrexplorer.com</li>
-                        <li><i class="fas fa-phone"></i> +593 995910824</li>
-                        <li><i class="fas fa-map-marker-alt"></i> EPN - Quito, Ecuador</li>
+                        <li>
+                            <a href="mailto:info@univesrexplorer.com">
+                                <div>
+                                    <svg class="icon">
+                                        <use href="/src/assets/img/icons.svg#email"></use>
+                                    </svg>
+                                    info@univesrexplorer.com
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+593995910824">
+                                <div>
+                                    <svg class="icon">
+                                        <use href="/src/assets/img/icons.svg#phone"></use>
+                                    </svg>
+                                    +593 99 591 0824
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://maps.app.goo.gl/WZiXRcc1tmfuiQEu6" target="_blank">
+                                <div>
+                                    <svg class="icon">
+                                        <use href="/src/assets/img/icons.svg#location"></use>
+                                    </svg>
+                                    EPN - Quito, Ecuador
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
