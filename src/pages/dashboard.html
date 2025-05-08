@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/fav-icon.svg">
   <title>Panel Principal | Universe Explorer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
   <script src="https://cdn.faceio.net/fio.js" defer></script>
@@ -17,13 +17,16 @@
   <main class="dashboard-container">
     <section class="user-welcome">
       <div class="user-info">
-        <img src="https://via.placeholder.com/80" alt="User profile" class="user-avatar" id="user-avatar">
+        <img src="https://i.postimg.cc/wMJwk8yc/image.png" alt="User profile" class="user-avatar" id="user-avatar">
         <div>
-          <h1 id="username-display">Bienvenido, Explorador</h1>
-          <p class="last-login">Último acceso: <span id="last-login">Hoy</span></p>
+          <h1 id="username-display">Bienvenido!</h1>
+          <p class="last-login">Continúa aprendiendo, la ciencia nunca deja de sorprendernos</p>
         </div>
       </div>
-      <button class="btn btn-logout" id="logout-btn">Cerrar Sesión</button>
+      <button class="btn btn-logout" id="logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Cerrar Sesión
+      </button>
     </section>
 
     <section class="gallery-controls">
@@ -81,7 +84,6 @@
     </div>
   </div>
 
-  <!-- Footer dinámico se cargará con JavaScript -->
   <footer id="main-footer"></footer>
 
   <script type="module" src="../assets/js/dashboard.js"></script>

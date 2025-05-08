@@ -1,82 +1,195 @@
-import { enrollWithFaceIO, authenticateWithFaceIO } from '../../modules/faceio-auth.js';
+const API_KEY = 'e6bcf6eb429a45198e7ddfad24e5a481';
+const video = document.getElementById('webcam');
+const canvas = document.getElementById('canvas');
+const captureBtn = document.getElementById('captureBtn');
+const faceCaptureContainer = document.getElementById('faceCaptureContainer');
+const closeModalBtn = document.getElementById('closeModal');
 
-// Simulación de base de datos de usuarios
-const USER_KEY = 'nasa-explorer-users';
-const CURRENT_USER_KEY = 'nasa-explorer-current-user';
+let currentMode = null; // 'register' o 'login'
+let cameraStream = null; // Variable global para el stream de la cámara
 
-function getUsers() {
-    return JSON.parse(localStorage.getItem(USER_KEY)) || [];
+// Iniciar webcam
+async function startWebcam() {
+  try {
+      // Detener cualquier cámara previa
+      stopWebcam();
+      
+      // Iniciar nueva cámara
+      cameraStream = await navigator.mediaDevices.getUserMedia({ 
+          video: { 
+              width: { ideal: 640 },
+              height: { ideal: 480 },
+              facingMode: 'user'
+          } 
+      });
+      
+      video.srcObject = cameraStream;
+      faceCaptureContainer.style.display = 'block';
+      
+      // Manejar cuando el usuario cierra la cámara manualmente
+      cameraStream.getVideoTracks()[0].onended = () => {
+          stopWebcam();
+      };
+      
+  } catch (err) {
+      console.error("Error al acceder a la cámara:", err);
+      alert("No se pudo acceder a la cámara. Por favor, asegúrate de haber otorgado los permisos necesarios.");
+  }
 }
 
-function saveUsers(users) {
-    localStorage.setItem(USER_KEY, JSON.stringify(users));
+// Función para detener completamente la cámara
+function stopWebcam() {
+  if (cameraStream) {
+      cameraStream.getTracks().forEach(track => {
+          track.stop(); // Detener cada track
+      });
+      cameraStream = null;
+  }
+  
+  if (video.srcObject) {
+      video.srcObject = null; // Limpiar el srcObject
+  }
+  
+  faceCaptureContainer.style.display = 'none';
 }
 
-export function getCurrentUser() {
-    return JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+// Capturar imagen del video
+function captureImage() {
+    const context = canvas.getContext('2d');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob(blob => {
+        const file = new File([blob], "face.jpg", { type: "image/jpeg" });
+
+        if (currentMode === 'register') {
+            registerFace(file);
+        } else if (currentMode === 'login') {
+            recognizeFace(file);
+        }
+
+        // Detener la cámara después de capturar
+        const stream = video.srcObject;
+        if (stream && stream.getTracks) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+
+        faceCaptureContainer.style.display = 'none';
+
+    }, 'image/jpeg', 0.95);
 }
 
-export function setCurrentUser(user) {
-    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-}
-
-export async function registerUser(userData) {
-    // Paso 1: Registro facial
-    const faceIOResult = await enrollWithFaceIO(userData);
-    if (!faceIOResult.success) {
-        return faceIOResult;
-    }
-
-    // Paso 2: Guardar usuario localmente
-    const users = getUsers();
-    const newUser = {
-        id: Date.now().toString(),
-        name: userData.name,
-        email: userData.email,
-        faceId: faceIOResult.data.facialId,
-        joinedDate: new Date().toISOString(),
-        lastLogin: new Date().toISOString()
+// Registrar rostro
+function registerFace(file) {
+    const data = {
+        name: "usuario_123",
+        store: "1",
+        collections: "",
+        unique: "0"
     };
 
-    users.push(newUser);
-    saveUsers(users);
-    setCurrentUser(newUser);
+    const formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(key, data[key]));
+    formData.append("photos", file); // Campo fotos
 
-    return {
-        success: true,
-        user: newUser
+    fetch("https://api.luxand.cloud/v2/person", {
+        method: "POST",
+        headers: {
+            "token": API_KEY
+        },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.uuid) {
+            alert("✅ ¡Rostro registrado! UUID: " + data.uuid);
+        } else {
+            alert("❌ Error al registrar: " + JSON.stringify(data));
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un problema al registrar el rostro.");
+    });
+}
+
+// Reconocer rostro
+function recognizeFace(file) {
+    const data = {
+        collections: "" 
     };
+
+    const formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(key, data[key]));
+    formData.append("photo", file); // Imagen a comparar
+
+    fetch("https://api.luxand.cloud/photo/search/v2", {
+        method: "POST",
+        headers: {
+            "token": API_KEY
+        },
+        body: formData
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("HTTP error! status: " + res.status);
+        }
+        return res.json();
+    })
+    .then(data => {
+        console.log("Respuesta de la API:", data);
+
+        if (Array.isArray(data) && data.length > 0 && data[0].probability > 0.7) {
+            const match = data[0];
+            alert(`¡Bienvenido, ${match.name}! Probabilidad: ${match.probability}`);
+
+            // Guardar datos del usuario
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("userUUID", match.uuid);
+            localStorage.setItem("userName", match.name);
+
+            // Redirigir
+            window.location.href = "./src/pages/dashboard.html";
+        } else {
+            alert("❌ No se encontró una coincidencia clara.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un problema con la autenticación facial.");
+    });
 }
 
-export async function loginUser() {
-    // Paso 1: Autenticación facial
-    const faceIOResult = await authenticateWithFaceIO();
-    if (!faceIOResult.success) {
-        return faceIOResult;
-    }
+// Eventos de botones
+document.getElementById("faceio-register").addEventListener("click", () => {
+  currentMode = 'register';
+  faceCaptureContainer.style.display = 'block';
+  startWebcam();
+});
 
-    // Paso 2: Buscar usuario
-    const users = getUsers();
-    const user = users.find(u => u.faceId === faceIOResult.data.facialId);
+document.getElementById("faceio-login").addEventListener("click", () => {
+  currentMode = 'login';
+  faceCaptureContainer.style.display = 'block';
+  startWebcam();
+});
 
-    if (!user) {
-        return {
-            success: false,
-            error: "Usuario no encontrado. Por favor regístrate primero."
-        };
-    }
+// captureBtn.addEventListener("click", captureImage);
+captureBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  captureImage();
+});
 
-    // Actualizar último login
-    user.lastLogin = new Date().toISOString();
-    saveUsers(users);
-    setCurrentUser(user);
+// Evento para cerrar el modal
+closeModalBtn.addEventListener("click", () => {
+  stopWebcam();
+  document.getElementById("loginModal").style.display = "none";
+});
 
-    return {
-        success: true,
-        user
-    };
-}
-
-export function logout() {
-    localStorage.removeItem(CURRENT_USER_KEY);
-}
+// Evento para hacer clic fuera del modal
+document.getElementById("loginModal").addEventListener("click", function(e) {
+  if (e.target === this) {
+      stopWebcam();
+      this.style.display = "none";
+  }
+});

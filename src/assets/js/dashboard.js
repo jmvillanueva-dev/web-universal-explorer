@@ -2,7 +2,6 @@ import  loadHeader from '../../modules/header.js';
 import  loadFooter from '../../modules/footer.js';
 import { fetchRandomAPOD, fetchAPODByDate, fetchTodaysAPOD } from '../../assets/js/nasa-api.js';
 import { showModal, closeModal } from '../../assets/js/ui.js';
-import { getUserData, logout } from '../../assets/js/authentication.js';
 
 // Variables globales
 let currentPage = 1;
@@ -32,18 +31,10 @@ const elements = {
 // Inicialización
 document.addEventListener('DOMContentLoaded', async () => {
 
-  // Verificar si el usuario está autenticado
-  if (!getUserData()) {
-    window.location.href = '../../index.html';
-    return;
-  }
-
   // Cargar header y footer
   await loadHeader();
   await loadFooter();
   
-  // Cargar datos del usuario
-  loadUserData();
   
   // Configurar fecha máxima (hoy) en el date picker
   const today = new Date().toISOString().split('T')[0];
@@ -54,29 +45,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // Cargar contenido inicial
   loadInitialContent();
+
 });
-
-function loadUserData() {
-  const user = getUserData();
-  if (user) {
-    elements.usernameDisplay.textContent = `Bienvenido, ${user.name || 'Explorador'}`;
-    elements.userAvatar.src = user.avatar || 'https://via.placeholder.com/80';
-    elements.lastLogin.textContent = formatLastLogin(user.lastLogin);
-  }
-}
-
-function formatLastLogin(timestamp) {
-  if (!timestamp) return 'Hoy';
   
-  const now = new Date();
-  const lastLogin = new Date(timestamp);
-  const diffDays = Math.floor((now - lastLogin) / (1000 * 60 * 60 * 24));
-  
-  if (diffDays === 0) return 'Hoy';
-  if (diffDays === 1) return 'Ayer';
-  return `Hace ${diffDays} días`;
-}
-
 function setupEventListeners() {
   // Botones de galería
   elements.randomPhotosBtn.addEventListener('click', loadRandomPhotos);
@@ -307,6 +278,5 @@ function showError(message) {
 }
 
 function logoutUser() {
-  logout();
   window.location.href = '../../index.html';
 }

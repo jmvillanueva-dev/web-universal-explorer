@@ -7,6 +7,9 @@
     <title>Universe Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./src/assets/css/main.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
     </head>
     <body>
     <!-- Header -->
@@ -49,7 +52,7 @@
                     <a href="#" class="btn" id="loginBtn">
                         <div>
                             <svg class="icon">
-                                <use href="./src/assets/icons/icons.svg#login"></use>
+                                <use href="./src/assets/icons/icons.svg#login-user"></use>
                             </svg>
                             <span>Iniciar Sesión</span>
                         </div>
@@ -66,8 +69,8 @@
                 <h1>Descubre los Misterios del Universo</h1>
                 <p>Explora las maravillas del cosmos a través de los datos de la NASA. Imágenes asombrosas, datos científicos y las últimas noticias del espacio a tu alcance.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn">Explorar Ahora</a>
-                    <a href="#" class="btn btn-outline">Ver Galería</a>
+                    <a href="#news-section" class="btn">Explorar Ahora</a>
+                    <a href="#" class="btn btn-outline" id="getAuthBtn">Ver Galería</a>
                 </div>
             </div>
         </div>
@@ -90,76 +93,79 @@
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
-            <h2>Iniciar Sesión</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginEmail">Correo Electrónico</label>
-                    <input type="email" id="loginEmail" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Contraseña</label>
-                    <input type="password" id="loginPassword" class="form-control" required>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Iniciar Sesión</button>
-            </form>
-            <div class="form-footer">
-                <p>O inicia sesión con</p>
-                <div class="social-login">
-                    <!-- <div class="social-btn faceio" id="faceio-register">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Registrarse con FaceIO</span>
-                    </div> -->
-                    <div class="social-btn faceio" id="faceio-login">
+            <h2 id="modalTitle">Iniciar Sesión</h2>
+
+            <!-- Formulario de Login -->
+            <div id="loginView">
+                <div class="form-group faceio-section">
+                    <p><strong>Inicia sesión con tu rostro:</strong></p>
+                    <div class="auth-btn faceio" id="faceio-login">
                         <i class="fas fa-sign-in-alt"></i>
                         <span>Iniciar con FaceIO</span>
                     </div>
                 </div>
+
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Correo Electrónico</label>
+                        <input type="email" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Iniciar Sesión</button>
+                </form>
+
                 <div class="switch-form">
                     <p>¿No tienes una cuenta? <a href="#" id="showRegister">Regístrate</a></p>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Register Modal -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeRegisterModal">&times;</span>
-            <h2>Crear Cuenta</h2>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="registerName">Nombre Completo</label>
-                    <input type="text" id="registerName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerEmail">Correo Electrónico</label>
-                    <input type="email" id="registerEmail" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerPassword">Contraseña</label>
-                    <input type="password" id="registerPassword" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerConfirmPassword">Confirmar Contraseña</label>
-                    <input type="password" id="registerConfirmPassword" class="form-control" required>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Registrarse</button>
-            </form>
-            <div class="form-footer">
-                <p>O regístrate con</p>
-                <div class="social-login">
-                    <div class="social-btn faceio" id="faceio-register">
-                      <i class="fas fa-user-circle"></i>
-                      <span>Registrarse con FaceIO</span>
+            <!-- Formulario de Registro -->
+            <div id="registerView" style="display: none;">
+                <form id="registerForm" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="registerName">Nombre de Usuario*</label>
+                        <input type="text" id="registerName" class="form-control" required>
                     </div>
-                    <!-- <div class="social-btn faceio" id="faceio-login">
-                      <i class="fas fa-sign-in-alt"></i>
-                      <span>Iniciar con FaceIO</span>
-                    </div> -->
-                  </div>
+                    <div class="form-group">
+                        <label for="registerEmail">E-mail*</label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña*</label>
+                        <input type="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña*</label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" required>
+                    </div>
+
+                    <div class="form-group faceio-section">
+                        <p><strong>Registro obligatorio con FaceIO:</strong></p>
+                        <p class="small-text">Debes registrar tu rostro para continuar con el proceso</p>
+                        <div class="auth-btn faceio" id="faceio-register">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Registrar Rostro*</span>
+                        </div>
+                    </div>
+                    <!-- <button type="submit" class="btn" style="width: 100%;">Completar Registro</button> -->
+                </form>
+
                 <div class="switch-form">
                     <p>¿Ya tienes una cuenta? <a href="#" id="showLogin">Iniciar Sesión</a></p>
                 </div>
+            </div>
+
+            <!-- Contenedor de captura facial (ahora centrado) -->
+            <div id="faceCaptureContainer" style="display: none;">
+                <video id="webcam" autoplay playsinline width="320" height="240"></video>
+                <br>
+                <button class="btn" id="captureBtn">Tomar Foto</button>
+                <canvas id="canvas" style="display: none;"></canvas>
             </div>
         </div>
     </div>
@@ -252,9 +258,12 @@
         </div>
     </footer>
 
-    <div id="faceio-modal"></div>
-    <script src="https://cdn.faceio.net/fio.js"></script>
-    <script type="module" src="app.js"> </script>
+    <script type="module" src="./app.js"> </script>
     <script type="module" src="./src/assets/js/news-api.js"> </script>
+    <script type="module" src="./src/assets/js/authentication.js"> </script>
+    <script> 
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html> 
+

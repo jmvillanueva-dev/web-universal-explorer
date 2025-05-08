@@ -56,7 +56,6 @@
   .gallery-controls {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 20px;
     margin-bottom: 30px;
   }
@@ -73,7 +72,7 @@
   }
   
   .date-selector label {
-    font-weight: 600;
+    font-size: 0.7rem;
   }
   
   .date-selector input {
@@ -347,6 +346,7 @@
   }
   
   @media (min-width: 768px) {
+
     .modal-body {
       grid-template-columns: 1fr 1fr;
     }

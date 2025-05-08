@@ -87,7 +87,8 @@ nav {
     position: relative;
 }
 
-.nav-links a > div {
+.nav-links a > div,
+nav a > div {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -177,6 +178,7 @@ a.nav-links:not(.btn):hover {
     font-size: 3.5rem;
     margin-bottom: 20px;
     background: linear-gradient(to right, var(--accent), white);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -244,6 +246,7 @@ a.nav-links:not(.btn):hover {
 .card-content p {
     margin-bottom: 20px;
     display: -webkit-box;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -286,11 +289,12 @@ a.nav-links:not(.btn):hover {
     z-index: 2000;
     justify-content: center;
     align-items: center;
+    padding: 15px;
 }
 
 .modal-content {
     background: linear-gradient(145deg, #1A1A2E, #16213E);
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
     width: 100%;
     max-width: 500px;
@@ -298,6 +302,8 @@ a.nav-links:not(.btn):hover {
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: modalFadeIn 0.5s ease;
+    overflow-y: auto;
+    max-height: 90vh;
 }
 
 @keyframes modalFadeIn {
@@ -313,12 +319,13 @@ a.nav-links:not(.btn):hover {
 
 .close-modal {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .close-modal:hover {
@@ -334,7 +341,7 @@ a.nav-links:not(.btn):hover {
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
@@ -345,7 +352,7 @@ a.nav-links:not(.btn):hover {
 
 .form-control {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
@@ -360,23 +367,7 @@ a.nav-links:not(.btn):hover {
     box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.3);
 }
 
-.form-footer {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.form-footer p {
-    margin-bottom: 15px;
-}
-
-.social-login {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.social-btn {
+.auth-btn {
     width: 50px;
     height: 50px;
     border-radius: 50px;
@@ -390,43 +381,51 @@ a.nav-links:not(.btn):hover {
 }
 
 /* Estilos para botones FaceIO */
-.social-btn.faceio {
+.auth-btn.faceio {
     width: auto;
     padding: 0 20px;
     background: linear-gradient(135deg, #4a6cf7, #2541b2);
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  .social-btn.faceio i {
-    font-size: 1.2rem;
-  }
-  
-  .social-btn.faceio span {
-    font-size: 0.9rem;
-  }
-  
-  .social-btn.faceio:hover {
-    background: linear-gradient(135deg, #2541b2, #4a6cf7);
-    transform: translateY(-3px);
-  }
-
-.facebook {
-    background: #3b5998;
 }
 
-.google {
-    background: #DB4437;
+.auth-btn.faceio:hover {
+background: linear-gradient(135deg, #2541b2, #4a6cf7);
+transform: translateY(-3px);
 }
 
-.twitter {
-    background: #1DA1F2;
-}
-
-.social-btn:hover {
+.auth-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.faceio-section {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(74, 108, 247, 0.1);
+    border-radius: 10px;
+    border: 1px dashed var(--accent);
+}
+
+.faceio-section p {
+    margin-bottom: 10px;
+    color: var(--light);
+    font-weight: 600;
+}
+
+.faceio-section p strong {
+    color: var(--accent);
+}
+
+.modal-content form {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .switch-form {
@@ -442,6 +441,29 @@ a.nav-links:not(.btn):hover {
 
 .switch-form a:hover {
     text-decoration: underline;
+}
+
+/* Estilos para la cámara centrada */
+#faceCaptureContainer {
+    display: none;
+    margin: 20px auto;
+    text-align: center;
+    width: 100%;
+}
+
+#webcam {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto;
+    display: block;
+    background: #000;
+}
+
+#captureBtn {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 200px;
 }
 
 /* Footer */
@@ -534,6 +556,26 @@ footer {
 }
 
 /* Responsive Design */
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .faceio-section {
+        padding: 10px;
+    }
+    
+    #webcam {
+        width: 100%;
+        height: auto;
+    }
+}
+
 @media (max-width: 768px) {
     .hero {
         padding-top: 130px;
