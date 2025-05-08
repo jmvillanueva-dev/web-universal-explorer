@@ -6,7 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/icons/fav-icon.svg">
     <title>Universe Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./src/assets/css/main.css">
     </head>
     <body>
     <!-- Header -->
@@ -105,14 +105,13 @@
             <div class="form-footer">
                 <p>O inicia sesión con</p>
                 <div class="social-login">
-                    <div class="social-btn facebook" id="facebookLogin">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <div class="social-btn google" id="googleLogin">
-                        <i class="fab fa-google"></i>
-                    </div>
-                    <div class="social-btn twitter" id="twitterLogin">
-                        <i class="fab fa-twitter"></i>
+                    <!-- <div class="social-btn faceio" id="faceio-register">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Registrarse con FaceIO</span>
+                    </div> -->
+                    <div class="social-btn faceio" id="faceio-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Iniciar con FaceIO</span>
                     </div>
                 </div>
                 <div class="switch-form">
@@ -149,16 +148,15 @@
             <div class="form-footer">
                 <p>O regístrate con</p>
                 <div class="social-login">
-                    <div class="social-btn facebook" id="facebookRegister">
-                        <i class="fab fa-facebook-f"></i>
+                    <div class="social-btn faceio" id="faceio-register">
+                      <i class="fas fa-user-circle"></i>
+                      <span>Registrarse con FaceIO</span>
                     </div>
-                    <div class="social-btn google" id="googleRegister">
-                        <i class="fab fa-google"></i>
-                    </div>
-                    <div class="social-btn twitter" id="twitterRegister">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                </div>
+                    <!-- <div class="social-btn faceio" id="faceio-login">
+                      <i class="fas fa-sign-in-alt"></i>
+                      <span>Iniciar con FaceIO</span>
+                    </div> -->
+                  </div>
                 <div class="switch-form">
                     <p>¿Ya tienes una cuenta? <a href="#" id="showLogin">Iniciar Sesión</a></p>
                 </div>
@@ -254,6 +252,9 @@
         </div>
     </footer>
 
-    <script type="module" src="script.js"> </script>
+    <div id="faceio-modal"></div>
+    <script src="https://cdn.faceio.net/fio.js"></script>
+    <script type="module" src="app.js"> </script>
+    <script type="module" src="./src/assets/js/news-api.js"> </script>
 </body>
 </html> 

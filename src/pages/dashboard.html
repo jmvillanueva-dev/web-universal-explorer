@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Principal | Universe Explorer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <script src="https://cdn.faceio.net/fio.js" defer></script>
+</head>
+<body>
+  <!-- Header dinámico se cargará con JavaScript -->
+  <header id="main-header"></header>
+
+  <main class="dashboard-container">
+    <section class="user-welcome">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/80" alt="User profile" class="user-avatar" id="user-avatar">
+        <div>
+          <h1 id="username-display">Bienvenido, Explorador</h1>
+          <p class="last-login">Último acceso: <span id="last-login">Hoy</span></p>
+        </div>
+      </div>
+      <button class="btn btn-logout" id="logout-btn">Cerrar Sesión</button>
+    </section>
+
+    <section class="gallery-controls">
+      <div class="controls-group">
+        <button class="btn" id="random-photos-btn">
+          <i class="fas fa-random"></i> Fotos Aleatorias
+        </button>
+        <button class="btn" id="today-photo-btn">
+          <i class="fas fa-star"></i> Foto del Día
+        </button>
+      </div>
+      
+      <div class="date-selector">
+        <label for="datePicker"><i class="fas fa-calendar-alt"></i> Seleccionar Fecha:</label>
+        <input type="date" id="datePicker" max="">
+      </div>
+    </section>
+
+    <section class="content-filters">
+      <div class="filter-options">
+        <span>Filtrar por:</span>
+        <button class="filter-btn active" data-filter="all">Todo</button>
+        <button class="filter-btn" data-filter="image">Imágenes</button>
+        <button class="filter-btn" data-filter="video">Videos</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar por título...">
+        <button class="btn btn-search"><i class="fas fa-search"></i></button>
+      </div>
+    </section>
+
+    <div class="loading-spinner" id="loading-spinner">
+      <div class="spinner"></div>
+      <p>Cargando maravillas del universo...</p>
+    </div>
+
+    <section class="gallery-grid" id="gallery">
+      <!-- Las tarjetas se insertarán aquí dinámicamente -->
+    </section>
+
+    <div class="pagination" id="pagination">
+      <button class="btn btn-pagination" id="prev-page"><i class="fas fa-chevron-left"></i></button>
+      <span id="page-indicator">Página 1</span>
+      <button class="btn btn-pagination" id="next-page"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </main>
+
+  <!-- Modal para vista detallada -->
+  <div class="modal" id="detail-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-body" id="modal-body">
+        <!-- Contenido del modal se cargará dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer dinámico se cargará con JavaScript -->
+  <footer id="main-footer"></footer>
+
+  <script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>
