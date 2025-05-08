@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
-  <script src="https://cdn.faceio.net/fio.js" defer></script>
 </head>
 <body>
   <!-- Header dinámico se cargará con JavaScript -->
@@ -19,7 +18,7 @@
       <div class="user-info">
         <img src="https://i.postimg.cc/wMJwk8yc/image.png" alt="User profile" class="user-avatar" id="user-avatar">
         <div>
-          <h1 id="username-display">Bienvenido!</h1>
+          <h1 id="username-display">Bienvenido, <span id="user-name"></span>!</h1>
           <p class="last-login">Continúa aprendiendo, la ciencia nunca deja de sorprendernos</p>
         </div>
       </div>
@@ -87,5 +86,7 @@
   <footer id="main-footer"></footer>
 
   <script type="module" src="../assets/js/dashboard.js"></script>
+  <script type="module" src="../assets/js/auth-check.js"></script>
+
 </body>
 </html>

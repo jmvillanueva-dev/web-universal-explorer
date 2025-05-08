@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para cargar noticias
     async function loadNews(page = 1) {
         try {
-            // Mostrar estado de carga
-            newsGrid.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
             
             // Hacer la petición a la API
             const response = await fetch(`https://api.spaceflightnewsapi.net/v4/articles/?limit=6&offset=${(page - 1) * 6}`);

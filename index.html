@@ -7,9 +7,6 @@
     <title>Universe Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./src/assets/css/main.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
     </head>
     <body>
     <!-- Header -->
@@ -24,7 +21,7 @@
                 </a>
                 <div class="nav-links">
                     <div class="nav-links" >
-                        <a href="#hero">
+                        <a href="./index.html">
                             <div>
                                 <svg class="icon">
                                     <use href="./src/assets/icons/icons.svg#home"></use>
@@ -107,7 +104,7 @@
 
                 <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
 
-                <form id="loginForm">
+                <!-- <form id="loginForm">
                     <div class="form-group">
                         <label for="loginEmail">Correo Electrónico</label>
                         <input type="email" id="loginEmail" class="form-control" required>
@@ -117,7 +114,7 @@
                         <input type="password" id="loginPassword" class="form-control" required>
                     </div>
                     <button type="submit" class="btn" style="width: 100%;">Iniciar Sesión</button>
-                </form>
+                </form> -->
 
                 <div class="switch-form">
                     <p>¿No tienes una cuenta? <a href="#" id="showRegister">Regístrate</a></p>
@@ -131,7 +128,7 @@
                         <label for="registerName">Nombre de Usuario*</label>
                         <input type="text" id="registerName" class="form-control" required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="registerEmail">E-mail*</label>
                         <input type="email" id="registerEmail" class="form-control" required>
                     </div>
@@ -142,8 +139,7 @@
                     <div class="form-group">
                         <label for="registerConfirmPassword">Confirmar Contraseña*</label>
                         <input type="password" id="registerConfirmPassword" class="form-control" required>
-                    </div>
-
+                    </div> -->
                     <div class="form-group faceio-section">
                         <p><strong>Registro obligatorio con FaceIO:</strong></p>
                         <p class="small-text">Debes registrar tu rostro para continuar con el proceso</p>
@@ -164,7 +160,7 @@
             <div id="faceCaptureContainer" style="display: none;">
                 <video id="webcam" autoplay playsinline width="320" height="240"></video>
                 <br>
-                <button class="btn" id="captureBtn">Tomar Foto</button>
+                <button class="btn" id="captureBtn">Continuar</button>
                 <canvas id="canvas" style="display: none;"></canvas>
             </div>
         </div>
@@ -212,8 +208,8 @@
                     <h3>Recursos</h3>
                     <ul>
                         <li><a href="https://api.nasa.gov/" target="_blank">API de la NASA</a></li>
-                        <li><a href="#">Documentación</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="https://www.spaceflightnewsapi.net/" target="_blank">API Spaceflight News</a></li>
+                        <li><a href="https://www.notion.so/UNIVERSE-EXPLORE-1ecc8f511c1180a0a713c16bb47cc9c0?pvs=4">Documentación</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">

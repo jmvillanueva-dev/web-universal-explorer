@@ -42,8 +42,8 @@ export default async function loadFooter() {
                         <h3>Recursos</h3>
                         <ul>
                             <li><a href="https://api.nasa.gov/" target="_blank">API de la NASA</a></li>
-                            <li><a href="#">Documentación</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="https://www.spaceflightnewsapi.net/" target="_blank">API Spaceflight News</a></li>
+                            <li><a href="https://www.notion.so/UNIVERSE-EXPLORE-1ecc8f511c1180a0a713c16bb47cc9c0?pvs=4">Documentación</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">

@@ -1,30 +1,10 @@
-// Modal funcionalidades
-const loginModal = document.getElementById('loginModal');
-const registerModal = document.getElementById('registerModal');
-const loginBtn = document.getElementById('loginBtn');
-const closeModal = document.getElementById('closeModal');
-const closeRegisterModal = document.getElementById('closeRegisterModal');
-const getAuthBtn = document.getElementById('getAuthBtn');
+// Manejo ingreso no autorizado a dashboard
+const urlParams = new URLSearchParams(window.location.search);
+const message = urlParams.get('msg');
 
-
-    loginBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        loginModal.style.display = 'flex';
-    });
-
-    getAuthBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        loginModal.style.display = 'flex';
-    });
-
-
-    closeModal.addEventListener('click', () => {
-        loginModal.style.display = 'none';
-    });
-
-    closeRegisterModal.addEventListener('click', () => {
-        registerModal.style.display = 'none';
-    });
+if (message === 'login') {
+    alert("Debes iniciar sesión para acceder al panel.");
+}
 
 // Enventos para manejo del modal cambio entre Login y Register
 document.getElementById("showRegister").addEventListener("click", (e) => {
